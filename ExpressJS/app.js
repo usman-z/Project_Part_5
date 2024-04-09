@@ -63,7 +63,7 @@ app.post("/employee", (req, res) => {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            res.json(results);
+            res.json(results[0]);
         }
     });
 });
@@ -76,7 +76,7 @@ app.post("/dependent", (req, res) => {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            res.json(results);
+            res.json(results[0]);
         }
     });
 });
@@ -95,8 +95,7 @@ app.post("/createEmployee", (req, res) => {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            const result = connection.query('SELECT * FROM employee WHERE ssn = ?', [ssn])
-            res.json(result[0]);
+            res.status(201).send('Success');
         }
     });
 });
@@ -110,8 +109,7 @@ app.post("/createDependent", (req, res) => {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            const result = connection.query('SELECT * FROM dependent WHERE ssn = ?', [ssn])
-            res.json(result[0]);
+            res.status(201).send('Success');
         }
     });
 });
