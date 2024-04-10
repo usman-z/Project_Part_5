@@ -32,4 +32,36 @@ export class MainPageComponent implements OnInit {
     )
   }
 
+  formatDob(dob: string): string {
+    let formattedDob: string = ''
+    for (let i = 0; i < 10; i++) {
+      formattedDob += dob.charAt(i);
+    }
+    return formattedDob
+  }
+
+  addEmployee() {
+    this.router.navigate(['/employee'], {
+      queryParams: { ssn: null, add: true }
+    });
+  }
+
+  editEmployee(ssn: number) {
+    this.router.navigate(['/employee'], {
+      queryParams: { ssn: ssn, add: false }
+    });
+  }
+
+  addDependent() {
+    this.router.navigate(['/dependent'], {
+      queryParams: { ssn: null, add: true }
+    });
+  }
+
+  editDependent(ssn: number) {
+    this.router.navigate(['/dependent'], {
+      queryParams: { id: ssn, add: false }
+    });
+  }
+
 }

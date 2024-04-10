@@ -1,78 +1,122 @@
 .content {
     display: flex;
     padding: 2em;
-    flex-direction: row;
-    justify-content: space-between;
-    .employees {
+    flex-direction: column;
+    .buttons {
+        padding: 2em;
         display: flex;
-        width: 55%;
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
+        padding-bottom: 1em;
+        flex-direction: row;
+        justify-content: space-between;
+        button {
+            border: none;
+            padding-left: 10px;
+            border-radius: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            color: white;
+            font-size: 18px;
+            background-color: #28a745;
+            
+            &:hover {
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); 
+                cursor: pointer;
+            }
+            &:active {
+                transition: transform 0.2s ease;
+            }
         }
-        
-        th, td {
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-        
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .employees, .dependents {
-            flex: 1;
-            margin-right: 20px;
-        }
-        
-        .message {
-            flex: 1;
-        }
-        
     }
-    .dependents {
+    .tables {
         display: flex;
-        width: 35%;
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
+        padding: 2em;
+        padding-top: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        .employees {
+            display: flex;
+            width: 60%;
+            button {
+                display: flex;
+                width: fit-content;
+                justify-content: flex-start;
+            }
+            table {
+                width: 100%;
+                border: 1px solid #ddd;
+            }
+            
+            th, td {
+                padding: 8px;
+                border-bottom: 1px solid #ddd;
+                text-align: center;
+            }
+
+            .link {
+                color: #007bff; 
+                cursor: pointer; 
+                text-decoration: underline; 
+
+                &:hover {
+                    color: #0056b3; 
+                    text-decoration: underline;
+                  }
+              }
+            
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            
+            tr:hover {
+                background-color: #f5f5f5;
+            }
+            
         }
-        
-        th, td {
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
+
+        .dependents {
+            display: flex;
+            width: 30%;
+            
+            table {
+                width: 100%;
+                border: 1px solid #ddd;
+            }
+            
+            th, td {
+                padding: 8px;
+                border-bottom: 1px solid #ddd;
+                text-align: center;
+            }
+
+            .link {
+                color: #007bff; 
+                cursor: pointer; 
+                text-decoration: underline; 
+
+                &:hover {
+                    color: #0056b3; 
+                    text-decoration: underline;
+                  }
+              }
+            
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            
+            tr:hover {
+                background-color: #f5f5f5;
+            }
+            
         }
-        
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .employees, .dependents {
-            flex: 1;
-            margin-right: 20px;
-        }
-        
-        .message {
-            flex: 1;
-        }
-        
     }
     .message {
+        p {
+            color: grey;
+            font-size: 20px;
 
+        }
     }
 }

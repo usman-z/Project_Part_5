@@ -4,14 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
-import { SelectorPageComponent } from './pages/selector-page/selector-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeeComponent } from './pages/employee/employee.component';
+import { DependentComponent } from './pages/dependent/dependent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
-    SelectorPageComponent
+    EmployeeComponent,
+    DependentComponent
   ],
   imports: [
     BrowserModule,

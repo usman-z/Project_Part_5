@@ -1,5 +1,5 @@
 export interface Employee {
-    ssn: string
+    ssn: number
     Fname: string
     Minit: string
     Lname: string

@@ -1,5 +1,5 @@
 export interface Dependent {
-    ssn: string
+    ssn: number
     name: string
     relationship: string
   }

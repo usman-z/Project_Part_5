@@ -1,0 +1,14 @@
+<div *ngIf="add" class="content">
+    <input type="number" placeholder="Social Security Number">
+    <input type="text" placeholder="Name">
+    <input type="text" placeholder="Relationship">
+    <button>Create</button>
+</div>
+
+<div *ngIf="dependent" class="content">
+    <input type="number" placeholder={{ dependent.ssn }}>
+    <input type="text" placeholder={{ dependent.name }}>
+    <input type="text" placeholder={{ dependent.relationship }}>
+    <button>Create</button>
+</div>
+
