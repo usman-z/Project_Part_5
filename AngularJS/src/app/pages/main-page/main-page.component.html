@@ -1,1 +1,47 @@
-<p>main-page works!</p>
+<div class="content">
+    <div class="employees">
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>SSN</th>
+                    <th>First Name</th>
+                    <th>Middle Initial</th>
+                    <th>Last Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees">
+                    <td>{{ employee.ssn }}</td>
+                    <td>{{ employee.Fname }}</td>
+                    <td>{{ employee.Minit }}</td>
+                    <td>{{ employee.Lname }}</td>
+                    <td>{{ employee.dob }}</td>
+                    <td>{{ employee.address }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="dependents">
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>SSN</th>
+                    <th>Name</th>
+                    <th>Relationship</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dependent of dependents">
+                    <td>{{ dependent.ssn }}</td>
+                    <td>{{ dependent.name }}</td>
+                    <td>{{ dependent.relationship }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="message">
+        <p *ngIf="message != ''"></p>
+    </div>
+</div>
