@@ -15,10 +15,11 @@ export class DependentService {
 
   };
 
-  getDependent(ssn: number){
+  getDependent(ssn: number, name: string){
     const url = 'http://localhost:8080/dependent';
     const request ={
-      "ssn": ssn
+      "ssn": ssn,
+      "name": name
     }
     return this.http.post<Dependent>(url, request);
   };
@@ -43,10 +44,11 @@ export class DependentService {
     return this.http.post(url, request);
   };
 
-  deleteDependent(ssn: number){
+  deleteDependent(ssn: number, name: string){
     const url = 'http://localhost:8080/deleteDependent';
     const request ={
-      "ssn": ssn
+      "ssn": ssn,
+      "name": name
     }
     return this.http.post(url, request);
   };

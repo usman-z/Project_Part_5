@@ -1,14 +1,44 @@
-<div *ngIf="add" class="content">
-    <input type="number" placeholder="Social Security Number">
-    <input type="text" placeholder="Name">
-    <input type="text" placeholder="Relationship">
-    <button>Create</button>
+<div *ngIf="!edit" class="content">
+    <div class="heading">Add Dependent</div>
+    <div class="dependent">
+        <div class="ssn">
+            <label for="ssn">Social Security Number:</label>
+            <input type="number" required [value]="ssn" readonly>
+        </div>
+        <div class="name">
+            <label for="name">Name:</label>
+            <input type="text" (change)="onNameChange($event)" required>
+        </div>
+        <div class="relationship">
+            <label for="relationship">Relationship:</label>
+            <input type="text" (change)="onRelationshipChange($event)" required>
+        </div>
+        <div class="buttons">
+            <button (click)="addDependent()" class="update" style="margin: auto;">Add Dependent</button>
+        </div>
+    </div>
 </div>
-
-<div *ngIf="dependent" class="content">
-    <input type="number" placeholder={{ dependent.ssn }}>
-    <input type="text" placeholder={{ dependent.name }}>
-    <input type="text" placeholder={{ dependent.relationship }}>
-    <button>Create</button>
+<div *ngIf="edit" class="content">
+    <div class="heading">Edit Dependent</div>
+    <div class="dependent">
+        <div class="ssn">
+            <label for="ssn">Social Security Number:</label>
+            <input type="number"  required [value]="dependent?.ssn" readonly>
+        </div>
+        <div class="name">
+            <label for="name">Name:</label>
+            <input type="text" (change)="onNameChange($event)" required [value]="dependent?.name" readonly>
+        </div>
+        <div class="relationship">
+            <label for="relationship">Relationship:</label>
+            <input type="text" (change)="onRelationshipChange($event)" required [value]="dependent?.relationship">
+        </div>
+        <div class="buttons">
+            <button (click)="deleteDependent()" class="delete">Delete Dependent</button>
+            <button (click)="updateDependent()" class="update">Update Dependent</button>
+        </div>
+    </div>
 </div>
-
+<div class="message">
+    <p *ngIf="message != ''">{{ message }}</p>
+</div>

@@ -1,7 +1,6 @@
 <div class="content">
     <div class="buttons">
         <button (click)="addEmployee()">Add Employee</button>
-        <button (click)="addDependent()" style="background-color: #ffc107;">Add Dependent</button>
     </div>
     <div class="tables">
         <div class="employees">
@@ -39,7 +38,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let dependent of dependents">
-                        <td (click)="editDependent(dependent.ssn)" class="link">{{ dependent.ssn }}</td>
+                        <td (click)="editDependent(dependent.ssn, dependent.name)" class="link">{{ dependent.ssn }}</td>
                         <td>{{ dependent.name }}</td>
                         <td>{{ dependent.relationship }}</td>
                     </tr>
@@ -48,7 +47,7 @@
         </div>
     </div>
     <div class="message">
-        <p *ngIf="message != ''"></p>
+        <p *ngIf="message != ''">{{ message }}</p>
     </div>
 </div>
 

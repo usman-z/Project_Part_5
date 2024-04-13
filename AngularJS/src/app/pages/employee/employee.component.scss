@@ -1,0 +1,153 @@
+$font-size: 19px;
+$margin: 10px;
+
+.content {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 80vh;
+    width: 100vw;
+    .heading {
+        margin-top: 100px;
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .employee {
+        box-shadow: 0 0px 20px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        width: 450px;
+        height: fit-content;
+        .ssn {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: $margin;
+            label {
+                font-size: $font-size;
+                width: 50%;
+            }
+            input {
+                font-size: $font-size;
+                width: 50%;
+            }
+        }
+        .Fname {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: $margin;
+            label {
+                font-size: $font-size;
+                width: 50%;
+            }
+            input {
+                font-size: $font-size;
+                width: 50%;
+            }
+        }
+        .Minit {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: $margin;
+            label {
+                font-size: $font-size;
+                width: 50%;
+            }
+            input {
+                font-size: $font-size;
+                width: 50%;
+            }
+        }
+        .Lname {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: $margin;
+            label {
+                font-size: $font-size;
+                width: 50%;
+            }
+            input {
+                font-size: $font-size;
+                width: 50%;
+            }
+        }
+        .dob {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: $margin;
+            label {
+                font-size: $font-size;
+                width: 50%;
+            }
+            input {
+                font-size: $font-size;
+                width: 50%;
+            }
+        }
+        .address {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 40px;
+            label {
+                font-size: $font-size;
+                width: 50%;
+            }
+            input {
+                font-size: $font-size;
+                width: 50%;
+            }
+        }
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .update {
+                display: flex;
+                font-size: 20px;
+                width: 30%;
+                color: #fff;
+                background-color: #28a745;
+                border-color: #28a745;
+                cursor: pointer;
+                &:hover {
+                    background-color: rgba(40, 167, 69, 0.8);
+                }
+            }
+            .add {
+                display: flex;
+                font-size: 20px;
+                width: 30%;
+                color: white;
+                background-color: #ffc107;
+                border-color: #ffc107;
+                cursor: pointer;
+                &:hover {
+                    background-color: rgba(255, 193, 7, 0.8);
+                }
+            }
+            .delete {
+                display: flex;
+                font-size: 20px;
+                width: 30%;
+                color: #fff;
+                background-color: #dc3545;
+                border-color: #dc3545;
+                cursor: pointer;
+                &:hover {
+                    background-color: rgba(220, 53, 69, 0.8);
+                }
+            }
+        }
+    }
+}
+.message {
+    p {
+        color: red;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: -50px;
+    }
+}

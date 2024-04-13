@@ -16,20 +16,44 @@ export class MainPageComponent implements OnInit {
   dependents: Dependent[] = []
   message: string = ''
 
+  reloaded: boolean = false;
+
   constructor(private router: Router, private employeeService: EmployeeService, private dependentService: DependentService) { }
 
   ngOnInit(): void {
-    this.employeeService.allEmployees().subscribe(
-      (response: Employee[]) => {
+
+    this.employeeService.allEmployees().subscribe({
+      next: (response: Employee[]) => {
         this.employees = response;
+      },
+      error: (error) => {
+        this.showErrorMessage(error);
       }
-    )
+    });
 
     this.dependentService.allDependents().subscribe(
       (response: Dependent[]) => {
         this.dependents = response;
+      },
+      (error) => {
+        this.showErrorMessage(error);
       }
     )
+  }
+
+  showErrorMessage(error: any) {
+    if (error.message == 'Http failure response for http://localhost:8080/dependents: 0 Unknown Error') {
+      this.message = 'ExpressJS backend must be runnning on localhost:8080'
+    } 
+    else if (error.error == "ECONNREFUSED") {
+      this.message = 'XAMPP servers must be running'
+    }
+    else if (error.error == "PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR") {
+      this.message = 'Unresponsive ExpressJS backend on localhost:8080'
+    }
+    else {
+      this.message = 'More Errors'
+    }
   }
 
   formatDob(dob: string): string {
@@ -42,25 +66,19 @@ export class MainPageComponent implements OnInit {
 
   addEmployee() {
     this.router.navigate(['/employee'], {
-      queryParams: { ssn: null, add: true }
+      queryParams: { ssn: null }
     });
   }
 
   editEmployee(ssn: number) {
     this.router.navigate(['/employee'], {
-      queryParams: { ssn: ssn, add: false }
+      queryParams: { ssn: ssn }
     });
   }
 
-  addDependent() {
+  editDependent(ssn: number, name: string) {
     this.router.navigate(['/dependent'], {
-      queryParams: { ssn: null, add: true }
-    });
-  }
-
-  editDependent(ssn: number) {
-    this.router.navigate(['/dependent'], {
-      queryParams: { id: ssn, add: false }
+      queryParams: { ssn: ssn, name: name }
     });
   }
 

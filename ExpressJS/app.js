@@ -36,7 +36,7 @@ app.get("/employees", (req, res) => {
     (error, results) => {
         if (error) {
             console.error('Error executing query:', error);
-            res.status(500).send('Error executing query');
+            res.status(500).send(error.code);
         } else {
             res.json(results);
         }
@@ -48,7 +48,7 @@ app.get("/dependents", (req, res) => {
     (error, results) => {
         if (error) {
             console.error('Error executing query:', error);
-            res.status(500).send('Error executing query');
+            res.status(500).send(error.code);
         } else {
             res.json(results);
         }
@@ -69,8 +69,8 @@ app.post("/employee", (req, res) => {
 });
 
 app.post("/dependent", (req, res) => {
-    const { ssn } = req.body;
-    connection.query('SELECT * FROM dependent WHERE ssn = ?', [ssn],
+    const { ssn, name } = req.body;
+    connection.query('SELECT * FROM dependent WHERE ssn = ? AND name = ?', [ssn, name],
     (error, results) => {
         if (error) {
             console.error('Error executing query:', error);
@@ -95,7 +95,7 @@ app.post("/createEmployee", (req, res) => {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            res.status(201).send('Success');
+            res.status(201).json({ message: 'Success' });
         }
     });
 });
@@ -109,7 +109,7 @@ app.post("/createDependent", (req, res) => {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            res.status(201).send('Success');
+            res.status(201).json({ message: 'Success' });
         }
     });
 });
@@ -128,7 +128,7 @@ app.post("/updateEmployee", (req, res) => {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            res.status(200).send('Success');
+            res.status(200).json({ message: 'Success' });
         }
     });
 });
@@ -136,13 +136,13 @@ app.post("/updateEmployee", (req, res) => {
 app.post("/updateDependent", (req, res) => {
     const { ssn, name, relationship } = req.body;
     connection.query(`      
-        UPDATE dependent SET name = ?, relationship = ? WHERE ssn = ?`, [name, relationship, ssn],
+        UPDATE dependent SET relationship = ? WHERE name = ? AND ssn = ?`, [relationship, name, ssn],
         (error, results) => {
         if (error) {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            res.status(200).send('Success');
+            res.status(200).json({ message: 'Success' });
         }
     });
 });
@@ -160,20 +160,20 @@ app.post("/deleteEmployee", (req, res) => {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            res.status(200).send('Success');
+            res.status(200).json({ message: 'Success' });
         }
     });
 });
 
 app.post("/deleteDependent", (req, res) => {
-    const { ssn } = req.body;
-    connection.query('DELETE FROM dependent WHERE ssn = ?', [ssn],
+    const { ssn, name } = req.body;
+    connection.query('DELETE FROM dependent WHERE ssn = ? AND name = ?', [ssn, name],
     (error, results) => {
         if (error) {
             console.error('Error executing query:', error);
             res.status(500).send('Error executing query');
         } else {
-            res.status(200).send('Success');
+            res.status(200).json({ message: 'Success' });
         }
     });
 });
