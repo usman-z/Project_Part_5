@@ -81,6 +81,32 @@ app.post("/dependent", (req, res) => {
     });
 });
 
+app.post("/searchEmployee", (req, res) => {
+    const { name } = req.body;
+    connection.query('SELECT * FROM employee WHERE Fname LIKE = ?', [name],
+    (error, results) => {
+        if (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('Error executing query');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+app.post("/searchDependent", (req, res) => {
+    const { name } = req.body;
+    connection.query('SELECT * FROM dependent WHERE name LIKE ?', [name],
+    (error, results) => {
+        if (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('Error executing query');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 
 /**
  * CREATE endpoints

@@ -56,5 +56,13 @@ export class EmployeeService {
     }
     return this.http.post(url, request);
   };
+
+  searchEmployee(name: string){
+    const url = 'http://localhost:8080/searchEmployee';
+    const request ={
+      "name": name
+    }
+    return this.http.post<Employee[]>(url, request);
+  };
   
 }

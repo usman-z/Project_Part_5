@@ -52,5 +52,13 @@ export class DependentService {
     }
     return this.http.post(url, request);
   };
+
+  searchDependent(name: string){
+    const url = 'http://localhost:8080/searchDependent';
+    const request ={
+      "name": name
+    }
+    return this.http.post<Dependent[]>(url, request);
+  };
   
 }

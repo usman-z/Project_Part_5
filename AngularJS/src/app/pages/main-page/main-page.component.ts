@@ -17,6 +17,7 @@ export class MainPageComponent implements OnInit {
   message: string = ''
 
   reloaded: boolean = false;
+  search: string = ''
 
   constructor(private router: Router, private employeeService: EmployeeService, private dependentService: DependentService) { }
 
@@ -80,6 +81,31 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/dependent'], {
       queryParams: { ssn: ssn, name: name }
     });
+  }
+
+  searchEmployee() {
+    this.employeeService.searchEmployee(this.search).subscribe({
+      next: (response: Employee[]) => {
+        this.employees = response;
+        this.search = '';
+      }
+    });
+  }
+
+  searchDependent() {
+    this.dependentService.searchDependent(this.search).subscribe({
+      next: (response: Dependent[]) => {
+        this.dependents = response;
+        this.search = '';
+      }
+    });
+  }
+
+  onChange(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    if (value) {
+      this.search = value
+    }
   }
 
 }
