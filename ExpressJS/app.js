@@ -18,7 +18,7 @@ app.listen(PORT, () => {
 
 const dbConfig = {
   host: 'localhost',
-  port: 6000,
+  port: 3306,
   user: 'root',
   database: 'Prj5',
   password: '',
@@ -81,9 +81,14 @@ app.post("/dependent", (req, res) => {
     });
 });
 
+
+/**
+ * SEARCH endpoints
+ */
+
 app.post("/searchEmployee", (req, res) => {
     const { name } = req.body;
-    connection.query('SELECT * FROM employee WHERE Fname LIKE = ?', [name],
+    connection.query('SELECT * FROM employee WHERE Fname LIKE ? UNION SELECT * FROM employee WHERE Lname LIKE ?', [name, name],
     (error, results) => {
         if (error) {
             console.error('Error executing query:', error);

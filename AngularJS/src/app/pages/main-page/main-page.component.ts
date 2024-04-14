@@ -17,7 +17,8 @@ export class MainPageComponent implements OnInit {
   message: string = ''
 
   reloaded: boolean = false;
-  search: string = ''
+  searchEmp: string = ''
+  searchDep: string = ''
 
   constructor(private router: Router, private employeeService: EmployeeService, private dependentService: DependentService) { }
 
@@ -32,14 +33,14 @@ export class MainPageComponent implements OnInit {
       }
     });
 
-    this.dependentService.allDependents().subscribe(
-      (response: Dependent[]) => {
+    this.dependentService.allDependents().subscribe({
+      next: (response: Dependent[]) => {
         this.dependents = response;
       },
-      (error) => {
+      error: (error) => {
         this.showErrorMessage(error);
       }
-    )
+    });
   }
 
   showErrorMessage(error: any) {
@@ -53,7 +54,7 @@ export class MainPageComponent implements OnInit {
       this.message = 'Unresponsive ExpressJS backend on localhost:8080'
     }
     else {
-      this.message = 'More Errors'
+      this.message = 'Error'
     }
   }
 
@@ -84,28 +85,59 @@ export class MainPageComponent implements OnInit {
   }
 
   searchEmployee() {
-    this.employeeService.searchEmployee(this.search).subscribe({
+    this.employeeService.searchEmployee(this.searchEmp).subscribe({
       next: (response: Employee[]) => {
         this.employees = response;
-        this.search = '';
       }
     });
   }
 
   searchDependent() {
-    this.dependentService.searchDependent(this.search).subscribe({
+    this.dependentService.searchDependent(this.searchDep).subscribe({
       next: (response: Dependent[]) => {
         this.dependents = response;
-        this.search = '';
       }
     });
   }
 
-  onChange(event: Event) {
+  onChangeEmployee(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     if (value) {
-      this.search = value
+      this.searchEmp = value
     }
+  }
+
+  onChangeDependent(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    if (value) {
+      this.searchDep = value
+    }
+  }
+
+  resetEmployee() {
+    this.employeeService.allEmployees().subscribe({
+      next: (response: Employee[]) => {
+        this.employees = response;
+        this.searchEmp = '';
+        const searchTextEmpInput = document.getElementById("searchTextEmp") as HTMLInputElement;;
+        if (searchTextEmpInput) {
+          searchTextEmpInput.value = '';
+        }
+      }
+    });
+  }
+
+  resetDependent() {
+    this.dependentService.allDependents().subscribe({
+      next: (response: Dependent[]) => {
+        this.dependents = response;
+        this.searchDep = '';
+        const searchTextDepInput = document.getElementById("searchTextDep") as HTMLInputElement;;
+        if (searchTextDepInput) {
+          searchTextDepInput.value = '';
+        }
+      }
+    });
   }
 
 }

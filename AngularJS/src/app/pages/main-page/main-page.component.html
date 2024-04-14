@@ -2,15 +2,17 @@
     <div class="searchEmployeeDependent">
         <div class="searchEmployee">
             <form class="formDiv" (submit)="searchEmployee()">
-              <input class="search" type="text" (change)="onChange($event)" placeholder="Search Employee" >
-              <button type="submit" class="submitButton"><img src="../../../assets/search-icon.png" alt="" ></button>
+              <input id="searchTextEmp" class="search" type="text" (change)="onChangeEmployee($event)" placeholder="Search Employee" >
+              <button type="submit" class="submitButton"><img style="cursor: pointer;" src="../../../assets/search-icon.png" alt=""></button>
             </form>
+            <button (click)="resetEmployee()" class="resetEmp">Reset</button>
           </div>
           <div class="searchDependent">
             <form class="formDiv" (submit)="searchDependent()">
-              <input class="search" type="text" (change)="onChange($event)" placeholder="Search Dependent" >
-              <button type="submit" class="submitButton"><img src="../../../assets/search-icon.png" alt="" ></button>
+              <input id="searchTextDep" class="search" type="text" (change)="onChangeDependent($event)" placeholder="Search Dependent" >
+              <button type="submit" class="submitButton"><img style="cursor: pointer;" src="../../../assets/search-icon.png" alt=""></button>
             </form>
+            <button (click)="resetDependent()" class="resetDep">Reset</button>
           </div>
     </div>
     <div class="buttons">
@@ -42,7 +44,7 @@
             </table>
         </div>
         <div class="dependents">
-            <table id="employeeTable">
+            <table id="dependentTable">
                 <thead>
                     <tr>
                         <th>SSN</th>

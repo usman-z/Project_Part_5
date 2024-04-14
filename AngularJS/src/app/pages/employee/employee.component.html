@@ -30,32 +30,32 @@
         </div>
     </div>
 </div>
-<div *ngIf="edit" class="content">
+<div *ngIf="edit && employee" class="content">
     <div class="heading">Edit Employee</div>
     <div class="employee">
         <div class="ssn">
             <label for="ssn">Social Security Number:</label>
-            <input type="number" (change)="onSSNChange($event)" required [value]="employee?.ssn" readonly>
+            <input type="number" (change)="onSSNChange($event)" required [value]="employee.ssn" readonly>
         </div>
         <div class="Fname">
             <label for="Fname">First Name:</label>
-            <input type="text" (change)="onFirstNameChange($event)" required [value]="employee?.Fname">
+            <input type="text" (change)="onFirstNameChange($event)" required [value]="employee.Fname">
         </div>
         <div class="Minit">
             <label for="Minit">Middle Initial:</label>
-            <input type="text" (change)="onMiddleInitialChange($event)" required [value]="employee?.Minit">
+            <input type="text" (change)="onMiddleInitialChange($event)" required [value]="employee.Minit">
         </div>
         <div class="Lname">
             <label for="Lname">Last Name:</label>
-            <input type="text" (change)="onLastNameChange($event)" required [value]="employee?.Lname">
+            <input type="text" (change)="onLastNameChange($event)" required [value]="employee.Lname">
         </div>
         <div class="dob">
             <label for="dob">Date of Birth:</label>
-            <input type="date" (change)="onDateOfBirthChange($event)" required>
+            <input type="date" (change)="onDateOfBirthChange($event)" required [value]="formatDOB(employee.dob)">
         </div>
         <div class="address">
             <label for="address">Address:</label>
-            <input type="text" (change)="onAddressChange($event)" required [value]="employee?.address">
+            <input type="text" (change)="onAddressChange($event)" required [value]="employee.address">
         </div>
         <div class="buttons">
             <button (click)="deleteEmployee()" class="delete">Delete Employee</button>
