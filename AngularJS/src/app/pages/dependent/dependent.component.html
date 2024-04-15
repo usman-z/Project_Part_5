@@ -3,15 +3,15 @@
     <div class="dependent">
         <div class="ssn">
             <label for="ssn">Social Security Number:</label>
-            <input type="number" required [value]="ssn" readonly>
+            <input type="number" min="0" required [value]="ssn" readonly>
         </div>
         <div class="name">
             <label for="name">Name:</label>
-            <input type="text" (change)="onNameChange($event)" required>
+            <input type="text" maxlength="40" (change)="onNameChange($event)" required>
         </div>
         <div class="relationship">
             <label for="relationship">Relationship:</label>
-            <input type="text" (change)="onRelationshipChange($event)" required>
+            <input type="text" maxlength="20" (change)="onRelationshipChange($event)" required>
         </div>
         <div class="buttons">
             <button (click)="addDependent()" class="update" style="margin: auto;">Add Dependent</button>
@@ -23,15 +23,15 @@
     <div class="dependent">
         <div class="ssn">
             <label for="ssn">Social Security Number:</label>
-            <input type="number"  required [value]="dependent?.ssn" readonly>
+            <input type="number" min="0" required [value]="dependent?.ssn" readonly>
         </div>
         <div class="name">
             <label for="name">Name:</label>
-            <input type="text" (change)="onNameChange($event)" required [value]="dependent?.name" readonly>
+            <input type="text" maxlength="40" (change)="onNameChange($event)" required [value]="dependent?.name" readonly>
         </div>
         <div class="relationship">
             <label for="relationship">Relationship:</label>
-            <input type="text" (change)="onRelationshipChange($event)" required [value]="dependent?.relationship">
+            <input type="text" maxlength="20" (change)="onRelationshipChange($event)" required [value]="dependent?.relationship">
         </div>
         <div class="buttons">
             <button (click)="deleteDependent()" class="delete">Delete Dependent</button>
