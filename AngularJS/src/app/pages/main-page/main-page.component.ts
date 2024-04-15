@@ -45,13 +45,13 @@ export class MainPageComponent implements OnInit {
 
   showErrorMessage(error: any) {
     if (error.message == 'Http failure response for http://localhost:8080/dependents: 0 Unknown Error') {
-      this.message = 'ExpressJS backend must be runnning on localhost:8080'
+      this.message = 'Please start ExpressJS backend on localhost:8080'
     } 
     else if (error.error == "ECONNREFUSED") {
       this.message = 'XAMPP servers must be running'
     }
     else if (error.error == "PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR") {
-      this.message = 'Unresponsive ExpressJS backend on localhost:8080'
+      this.message = 'Please restart ExpressJS backend on localhost:8080'
     }
     else {
       this.message = 'Error'
