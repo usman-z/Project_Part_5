@@ -55,18 +55,12 @@ export class DependentComponent implements OnInit {
   addDependent() {
     this.message = ''
 
-    const numberAsString: string = this.ssn?.toString() || '';
-    const ssnCheck = numberAsString.length == 9 || false;
-    if(!ssnCheck) {
-      this.message = 'SSN must be exactly 9 digits'
+    if(this.name == '' || this.relationship == '') {
+      this.message = "All information is required"
+      return;
     }
 
-    const lengthCheck: boolean = this.name.length < 20 && this.relationship.length < 20
-    if(!lengthCheck) {
-      this.message = 'Only maximum of 20 characters allowed'
-    }
-
-    const inputSafe = ssnCheck && lengthCheck;
+    const inputSafe = this.isInputValid(this.name, this.relationship);
 
     if (this.ssn && inputSafe) {
       this.dependentService.createDependent(this.ssn, this.name, this.relationship).subscribe({
@@ -80,20 +74,21 @@ export class DependentComponent implements OnInit {
   updateDependent() {
     this.message = ''
 
-    const lengthCheck: boolean = this.relationship.length < 20
-    if(!lengthCheck) {
-      this.message = 'Only maximum of 20 characters allowed'
+    if(this.relationship == '') {
+      if(this.dependent){
+        this.name = this.dependent.relationship
+      }
+    } 
+    else {
+      const alphabetRegex: RegExp = /^[A-Za-z]+$/;
+      const isRelationshipValid: boolean = alphabetRegex.test(this.relationship);
+      if(!isRelationshipValid) {
+        this.message = "Relationship can only have english alphabets";
+        return;
+      }
     }
 
-    if(this.name == '' && this.dependent) {
-      this.name = this.dependent.name
-    } 
-
-    if(this.relationship == '' && this.dependent) {
-      this.name = this.dependent.relationship
-    } 
-
-    if (this.ssn && lengthCheck) {
+    if (this.ssn) {
       this.dependentService.updateDependent(this.ssn, this.name, this.relationship).subscribe({
         next: () => {
           this.router.navigate(['/']);
@@ -110,6 +105,24 @@ export class DependentComponent implements OnInit {
         }
       });
     }
+  }
+
+  isInputValid(name: string, relationship: string): boolean {
+    const alphabetRegex: RegExp = /^[A-Za-z]+$/;
+
+    const isNameValid: boolean = alphabetRegex.test(name);
+    if(!isNameValid) {
+      this.message = "Name can only have english alphabets";
+      return false;
+    }
+
+    const isRelationshipValid: boolean = alphabetRegex.test(relationship);
+    if(!isRelationshipValid) {
+      this.message = "Relationship can only have english alphabets";
+      return false;
+    }
+
+    return true;
   }
 
 }

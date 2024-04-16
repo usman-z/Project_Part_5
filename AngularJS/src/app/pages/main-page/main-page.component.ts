@@ -20,6 +20,9 @@ export class MainPageComponent implements OnInit {
   searchEmp: string = ''
   searchDep: string = ''
 
+  employeesFiltered: boolean = false
+  dependentsFiltered: boolean = false;
+
   constructor(private router: Router, private employeeService: EmployeeService, private dependentService: DependentService) { }
 
   ngOnInit(): void {
@@ -88,6 +91,7 @@ export class MainPageComponent implements OnInit {
     this.employeeService.searchEmployee(this.searchEmp).subscribe({
       next: (response: Employee[]) => {
         this.employees = response;
+        this.employeesFiltered = true;
       }
     });
   }
@@ -96,6 +100,7 @@ export class MainPageComponent implements OnInit {
     this.dependentService.searchDependent(this.searchDep).subscribe({
       next: (response: Dependent[]) => {
         this.dependents = response;
+        this.dependentsFiltered = true;
       }
     });
   }
@@ -123,6 +128,7 @@ export class MainPageComponent implements OnInit {
         if (searchTextEmpInput) {
           searchTextEmpInput.value = '';
         }
+        this.employeesFiltered = false;
       }
     });
   }
@@ -136,6 +142,7 @@ export class MainPageComponent implements OnInit {
         if (searchTextDepInput) {
           searchTextDepInput.value = '';
         }
+        this.dependentsFiltered = false;
       }
     });
   }

@@ -94,8 +94,8 @@ app.post("/searchEmployee", (req, res) => {
 });
 
 app.post("/searchDependent", (req, res) => {
-    const { name } = req.body;
-    connection.query('SELECT * FROM dependent WHERE name LIKE ?', [name],
+    const { ssn } = req.body;
+    connection.query('SELECT * FROM dependent WHERE ssn = ?', [ssn],
     (error, results) => {
         if (error) {
             res.status(500).send('Error executing query');

@@ -41,6 +41,7 @@
                         <td>{{ employee.address }}</td>
                     </tr>
                 </tbody>
+                <p *ngIf="employeesFiltered">Showing search results</p>
             </table>
         </div>
         <div class="dependents">
@@ -59,6 +60,7 @@
                         <td>{{ dependent.relationship }}</td>
                     </tr>
                 </tbody>
+                <p *ngIf="dependentsFiltered">Showing search results</p>
             </table>
         </div>
     </div>

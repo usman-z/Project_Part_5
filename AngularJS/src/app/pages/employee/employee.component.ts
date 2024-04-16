@@ -81,23 +81,20 @@ export class EmployeeComponent implements OnInit {
 
   addEmployee() {
     this.message = ''
+
+    if(this.firstName == '' || this.middleInitial == '' || this.lastName == '' || this.dateOfBirth == '' || this.address == '') {
+      this.message = "All information is required"
+      return;
+    }
+
     const numberAsString: string = this.ssn?.toString() || '';
     const ssnCheck = numberAsString.length == 9 || false;
     if(!ssnCheck) {
       this.message = 'SSN must be exactly 9 digits'
+      return;
     }
 
-    const middleInitialCheck: boolean = this.middleInitial.length == 1
-    if(!middleInitialCheck) {
-      this.message = 'Middle Initial must be a 1 character'
-    }
-
-    const lengthCheck: boolean = this.firstName.length < 20 && this.lastName.length < 20 && this.address.length < 20
-    if(!lengthCheck) {
-      this.message = 'Only maximum of 20 characters allowed'
-    }
-
-    const inputSafe = ssnCheck && middleInitialCheck && lengthCheck;
+    const inputSafe = this.isInputValid(this.firstName, this.middleInitial, this.lastName, this.dateOfBirth, this.address);
 
     if (this.ssn && inputSafe) {
       this.employeeService.createEmployee(this.ssn, this.firstName, this.middleInitial, this.lastName, this.dateOfBirth, this.address).subscribe({
@@ -111,26 +108,36 @@ export class EmployeeComponent implements OnInit {
   updateEmployee() {
     this.message = ''
 
-    const middleInitialCheck: boolean = this.middleInitial != '' && this.middleInitial.length != 1
-    if(middleInitialCheck) {
-      this.message = 'Middle Initial must be a 1 character'
-    }
-
-    const lengthCheck: boolean = this.firstName.length < 20 && this.lastName.length < 20 && this.address.length < 20
-    if(!lengthCheck) {
-      this.message = 'Only maximum of 20 characters allowed'
-    }
-
-    if(this.firstName == '' && this.employee) {
-      this.firstName = this.employee.Fname
+    if(this.firstName == '') {
+      if(this.employee) {
+        this.firstName = this.employee.Fname
+      }
     } 
+    else {
+      if(!this.isValid(this.firstName)){
+        this.message = "First Name can only have english alphabets";
+        return;
+      }
+    }
 
     if(this.middleInitial == '' && this.employee) {
       this.middleInitial = this.employee.Minit
+    }
+    else {
+      if(!this.isValid(this.middleInitial)){
+        this.message = "Middle Initial can only be an english alphabet";
+        return;
+      }
     } 
 
     if(this.lastName == '' && this.employee) {
       this.lastName = this.employee.Lname
+    } 
+    else {
+      if(!this.isValid(this.lastName)){
+        this.message = "Last Name can only have english alphabets";
+        return;
+      }
     } 
 
     if(this.dateOfBirth == '' && this.employee) {
@@ -140,11 +147,15 @@ export class EmployeeComponent implements OnInit {
     if(this.address == '' && this.employee) {
       this.address = this.employee.address
     } 
+    else {
+      const addressRegex: RegExp = /^[A-Za-z0-9\s]+$/;
+      if(!addressRegex.test(this.address)){
+        this.message = "Address can only have numerical values and english alphabets";
+        return;
+      }
+    } 
 
-
-    const inputSafe = !middleInitialCheck && lengthCheck;
-
-    if (this.ssn && inputSafe) {
+    if (this.ssn) {
       this.employeeService.updateEmployee(this.ssn, this.firstName, this.middleInitial, this.lastName, this.dateOfBirth, this.address).subscribe({
         next: (response) => {
           this.router.navigate(['/']);
@@ -178,6 +189,48 @@ export class EmployeeComponent implements OnInit {
       formattedDob += dob.charAt(i);
     }
     return formattedDob
+  }
+
+  isInputValid(firstName: string, middleInitial: string, lastName: string, dateOfBirth: string, address: string): boolean {
+    const addressRegex: RegExp = /^[A-Za-z0-9\s]+$/;
+    const nameRegex: RegExp = /^[A-Za-z]+$/;
+
+    const isFirstNameValid: boolean = nameRegex.test(firstName);
+    if(!isFirstNameValid) {
+      this.message = "First Name can only have english alphabets";
+      return false;
+    }
+
+    const isMiddleInitialValid: boolean = nameRegex.test(middleInitial);
+    if(!isMiddleInitialValid) {
+      this.message = "Middle Initial has to be an english alphabet";
+      return false;
+    }
+
+    const isLastNameValid: boolean = nameRegex.test(lastName);
+    if(!isLastNameValid) {
+      this.message = "Last Name can only have english alphabets";
+      return false;
+    }
+
+    const isAddressValid: boolean = addressRegex.test(address);
+    if(!isAddressValid) {
+      this.message = "Address can only have numerical values and english alphabets";
+      return false;
+    }
+
+    return true;
+  }
+
+  isValid(str: string): boolean {
+    const alphabetRegex: RegExp = /^[A-Za-z]+$/;
+
+    const isStringValid: boolean = alphabetRegex.test(str);
+    if(!isStringValid) {
+      return false;
+    }
+
+    return true;
   }
 
 }
