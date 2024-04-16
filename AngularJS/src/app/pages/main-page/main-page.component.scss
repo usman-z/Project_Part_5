@@ -9,7 +9,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        width: 72%;
+        width: 73.5%;
         margin-left: 20em;
         .searchEmployee {
             display: flex;
@@ -23,6 +23,8 @@
                     border: none;
                     height: 30px;
                     font-size: 19px;
+                    width: 250px;
+                    margin: 2px;
                 }
                 .submitButton {
                     border: none;
@@ -53,6 +55,8 @@
                     border: none;
                     height: 30px;
                     font-size: 19px;
+                    width: 250px;
+                    margin: 2px;
                 }
                 .submitButton {
                     border: none;

@@ -2,14 +2,14 @@
     <div class="searchEmployeeDependent">
         <div class="searchEmployee">
             <form class="formDiv" (submit)="searchEmployee()">
-              <input id="searchTextEmp" class="search" type="text" (change)="onChangeEmployee($event)" placeholder="Search Employee" >
+              <input id="searchTextEmp" class="search" type="text" (change)="onChangeEmployee($event)" placeholder="Search Employee By Name" >
               <button type="submit" class="submitButton"><img style="cursor: pointer;" src="../../../assets/search-icon.png" alt=""></button>
             </form>
             <button (click)="resetEmployee()" class="resetEmp">Reset</button>
           </div>
           <div class="searchDependent">
             <form class="formDiv" (submit)="searchDependent()">
-              <input id="searchTextDep" class="search" type="text" (change)="onChangeDependent($event)" placeholder="Search Dependent" >
+              <input id="searchTextDep" class="search" type="text" (change)="onChangeDependent($event)" placeholder="Search Dependent By SSN" >
               <button type="submit" class="submitButton"><img style="cursor: pointer;" src="../../../assets/search-icon.png" alt=""></button>
             </form>
             <button (click)="resetDependent()" class="resetDep">Reset</button>

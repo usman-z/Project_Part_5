@@ -83,7 +83,7 @@ app.post("/dependent", (req, res) => {
 
 app.post("/searchEmployee", (req, res) => {
     const { name } = req.body;
-    connection.query('SELECT * FROM employee WHERE Fname LIKE ? UNION SELECT * FROM employee WHERE Lname LIKE ?', [name, name],
+    connection.query("SELECT * FROM employee WHERE Fname LIKE '"+name+"%' UNION SELECT * FROM employee WHERE Lname LIKE '"+name+"%'",
     (error, results) => {
         if (error) {
             res.status(500).send('Error executing query');

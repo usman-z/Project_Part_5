@@ -108,7 +108,7 @@ export class DependentComponent implements OnInit {
   }
 
   isInputValid(name: string, relationship: string): boolean {
-    const alphabetRegex: RegExp = /^[A-Za-z]+$/;
+    const alphabetRegex: RegExp = /^[A-Za-z\s]+$/;
 
     const isNameValid: boolean = alphabetRegex.test(name);
     if(!isNameValid) {
