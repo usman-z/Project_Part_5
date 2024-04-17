@@ -174,6 +174,12 @@ app.post("/updateDependent", (req, res) => {
 
 app.post("/deleteEmployee", (req, res) => {
     const { ssn } = req.body;
+    connection.query('DELETE FROM dependent WHERE ssn = ?', [ssn],
+    (error, results) => {
+        if (error) {
+            res.status(500).send('Error executing query');
+        }
+    });
     connection.query('DELETE FROM employee WHERE ssn = ?', [ssn],
     (error, results) => {
         if (error) {

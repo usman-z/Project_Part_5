@@ -66,6 +66,9 @@ export class DependentComponent implements OnInit {
       this.dependentService.createDependent(this.ssn, this.name, this.relationship).subscribe({
         next: () => {
           this.router.navigate(['/']);
+        },
+        error: (err) => {
+          this.message = 'Dependent with the Same Name already exists'
         }
       });
     }

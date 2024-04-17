@@ -168,10 +168,10 @@ export class EmployeeComponent implements OnInit {
     if (this.ssn) {
       this.employeeService.deleteEmployee(this.ssn).subscribe({
         next: (response) => {
-          this.router.navigate(['/']);
-        },
-        error: (error) => {
-          this.message = 'Unable to delete an employee with dependents'
+          this.message = "Cascade deleting Employee and Employee's dependents";
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 3000);
         }
       });
     }
